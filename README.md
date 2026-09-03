@@ -1,97 +1,143 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📱 Awesome — React Native Core Fundamentals
 
-# Getting Started
+[![React Native](https://img.shields.io/badge/React_Native-v0.87.1-61DAFB?logo=react&logoColor=black)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-v5.0+-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Platform](https://img.shields.io/badge/Platform-Android_%7C_iOS-brightgreen)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+A foundational React Native application built with React Native CLI and TypeScript. This project demonstrates core mobile development concepts including environment setup, component primitives, safe area handling, and dynamic system-level Light/Dark theme detection.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🎯 Key Concepts Covered
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- ⚙️ **CLI Environment & Architecture**: Understanding project setup, entry points (`index.js`), and component registration via `AppRegistry`.
+- 🧱 **Core Primitives**: Building UI using fundamental components like `<View>`, `<Text>`, and `<SafeAreaView>` for notch and boundary safety.
+- 🌓 **Dynamic Theme Handling**: Utilizing the `useColorScheme()` hook to automatically adapt layout and typography styles according to system Light/Dark mode preferences.
+- 🎨 **Styling API**: Scoped, type-safe styling using `StyleSheet.create`.
+- 🔄 **Component Architecture**: Modular component structure separating basic views (`App.tsx`) and enhanced theme-aware components (`AppPro.tsx`).
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+## 📂 Project Structure
+
+```text
+Awesome/
+├── index.js              # Application entry point & AppRegistry registration
+├── App.tsx               # Basic React Native component setup
+├── AppPro.tsx            # Theme-aware functional component
+├── app.json              # App configuration metadata
+├── babel.config.js       # Babel configuration
+├── metro.config.js       # Metro bundler configuration
+├── tsconfig.json         # TypeScript configuration
+├── package.json          # Project dependencies & scripts
+├── android/              # Native Android project configuration
+└── ios/                  # Native iOS project configuration
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 🛠️ Tech Stack & Dependencies
 
-### Android
+- **Framework**: [React Native](https://reactnative.dev/) (v0.87.1)
+- **Library**: [React](https://react.dev/) (v19.2.3)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Safe Area Management**: `react-native-safe-area-context`
+- **Build System**: Metro Bundler & React Native CLI
 
-```sh
-# Using npm
-npm run android
+---
 
-# OR using Yarn
-yarn android
+## 💻 Code Overview
+
+Below is an excerpt from [`AppPro.tsx`](./AppPro.tsx) illustrating dynamic theme detection and conditional styling:
+
+```tsx
+import React, { JSX } from 'react';
+import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+const AppPro = (): JSX.Element => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Text style={isDarkMode ? styles.whiteText : styles.darkText}>
+          Hello world, This is a simple AppPro
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default AppPro;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  whiteText: {
+    color: 'white',
+  },
+  darkText: {
+    color: 'black',
+  },
+});
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 🚀 Getting Started
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### Prerequisites
 
-```sh
-bundle install
-```
+Ensure your environment is configured according to the official [React Native CLI Setup Guide](https://reactnative.dev/docs/set-up-your-environment).
 
-Then, and every time you update your native dependencies, run:
+- **Node.js**: `>= 22.11.0`
+- **JDK**: `17` or higher
+- **Android Studio** (for Android SDK & Emulator setup)
+- **Xcode & CocoaPods** (for iOS development on macOS)
 
-```sh
-bundle exec pod install
-```
+### Installation
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Imtiaz-Ali17314/Awesome-App-React-Native.git
+   cd Awesome-App-React-Native
+   ```
 
-```sh
-# Using npm
-npm run ios
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-# OR using Yarn
-yarn ios
-```
+3. **Install CocoaPods (iOS only)**:
+   ```bash
+   cd ios && pod install && cd ..
+   ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 🏃 Running the App
 
-## Step 3: Modify your app
+1. **Start Metro Dev Server**:
+   ```bash
+   npm start
+   ```
 
-Now that you have successfully run the app, let's make changes!
+2. **Run on Android**:
+   ```bash
+   npm run android
+   ```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+3. **Run on iOS**:
+   ```bash
+   npm run ios
+   ```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+---
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## 📄 License
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is licensed under the [MIT License](LICENSE).
